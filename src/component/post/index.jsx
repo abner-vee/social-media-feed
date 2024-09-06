@@ -1,36 +1,18 @@
-import {useCallback, useEffect, useRef, useState} from "react";
-import axios from "axios";
+import React from "react";
 
 const Post = ({ post }) => {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [page, setPage] = useState(1);
-    const [posts, setPosts] = useState([]);
-    const [hasMore, setHasMore] = useState(true);
-    const observer = useRef();
-
-    const fetchPosts = async () => {
-        setLoading(true);
-        try {
-            const res = await axios.get(`https://jsonplaceholder.typicode.com/posts`, {
-                params: { _limit: 10, _page: page },
-            });
-            if (res.data.length === 0) {
-                setHasMore(false);
-            }
-            setPosts((prevPosts) => [...prevPosts, ...res.data]);
-        } catch (error) {
-            setError("Error fetching posts");
-        } finally {
-            setLoading(false);
-        }
-    };
-
     return (
-        <div className="post">
-            <h3>{post.title}</h3>
-            <p>{post.body}</p>
-        </div>
+        <a
+            href="#"
+            className="block p-6 bg-white my-5 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+        >
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                {post.title}
+            </h5>
+            <p className="font-normal text-gray-700 dark:text-gray-400">
+                {post.body}
+            </p>
+        </a>
     );
 };
 
